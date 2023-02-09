@@ -76,3 +76,17 @@ footer {
     padding: 0.5rem;
     border: solid thin black;
 }
+
+.correct-message {
+    display:none;
+    font-style: italic;
+    color:var(--darkBlue);
+    text-align:left;
+}
+
+.wrong-message {
+    display: none;
+    font-style: italic;
+    color:var(--darkBlue);
+    text-align:left;
+} 
