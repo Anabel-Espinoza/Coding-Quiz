@@ -54,7 +54,7 @@ main {
     background-color: white;
     border: black solid thin;
     text-align: center;
-    height: 75%;
+    min-height: 75%;
     width: 75%;
     line-height: 2rem;
     padding: 35px;
@@ -77,16 +77,20 @@ footer {
     border: solid thin black;
 }
 
+.wrong-message,
 .correct-message {
-    display:none;
-    font-style: italic;
-    color:var(--darkBlue);
-    text-align:left;
-}
-
-.wrong-message {
     display: none;
     font-style: italic;
     color:var(--darkBlue);
     text-align:left;
 } 
+
+.listAnswersEl {
+    display: flex;
+    flex-direction: column;
+
+}
+
+#answerAEl, #answerBEl, #answerCEl, #answerDEl {
+    display: none;
+}
