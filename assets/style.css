@@ -39,7 +39,7 @@ nav a {
 
 button {
     background-color: var(--darkBlue);
-    padding: 1rem 2rem;
+    padding: 0.5rem 2rem;
     margin: 1rem;
     color:white;
     font-size: 1.2rem;
@@ -48,6 +48,8 @@ button {
 
 button:hover {
     transform:scale(1.05);
+    background-color: var(--lightBlue);
+    color:var(--darkBlue)
 }
 
 main {
@@ -91,6 +93,22 @@ footer {
 
 }
 
-#answerAEl, #answerBEl, #answerCEl, #answerDEl {
+#answerAEl, #answerBEl, #answerCEl, #answerDEl, .save-info {
     display: none;
 }
+
+textarea {
+    padding: 5px 0;
+    border: thin solid silver;
+    width: 120px;
+    height: 30px;
+    resize:none;
+    text-align: center;
+}
+
+textarea:focus {
+    border: 3px solid silver;   
+}
+
+
+  
