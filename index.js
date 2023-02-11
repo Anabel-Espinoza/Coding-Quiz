@@ -1,6 +1,5 @@
-//Variables
+// Variables
 let correctCounter = 0
-let wrongCounter = 0
 let startBtn = document.querySelector('#startEl')
 let questionText = document.querySelector('.questionEl')
 let instructionsText = document.querySelector('.instructionsEl')
@@ -18,6 +17,7 @@ let timerEl = document.querySelector('.timer-El')
 let saveInfoEl = document.querySelector('.save-info')
 let submitBtn = document.querySelector('#submit-btn')
 let initialsEl = document.querySelector('#initials-el')
+let highScoreList = document.querySelector('.highScoresList')
 
 // questions bank
 const questions = [{
@@ -36,26 +36,26 @@ const questions = [{
     question: '4. String values must be enclosed within __________ when being assigned to variables.',
     answers: ['commas', 'curly brackets','quotes','parenthesis'],
     correctAnswer: 'quotes'
-// } , {
-//     question: '5. A very useful tool used during development and debugging for printing content to the debugger is:',
-//     answers: ['JavaScript', 'terminal/bash','for loops','console.log'],
-//     correctAnswer: 'console.log'
-// } , {
-//     question: '6. Inside the HTML document, the JavaScript code must be placed in the _________ element',
-//     answers: ['<head>', '<footer>','<script>','<link>'],
-//     correctAnswer: '<script>'
-// }  , {
-//     question: '7. For the following array ["a","b","c","d"], the index for letter "a" is:',
-//     answers: ['0', '1','2','3'],
-//     correctAnswer: '0'
-// }  , {
-//     question: "8. The method used to remove the last element of my array is:",
-//     answers: ['push()', 'unshift()','concat()','pop()'],
-//     correctAnswer: 'pop()'
+} , {
+    question: '5. A very useful tool used during development and debugging for printing content to the debugger is:',
+    answers: ['JavaScript', 'terminal/bash','for loops','console.log'],
+    correctAnswer: 'console.log'
+} , {
+    question: '6. Inside the HTML document, the JavaScript code must be placed in the _________ element',
+    answers: ['<head>', '<footer>','<script>','<link>'],
+    correctAnswer: '<script>'
+}  , {
+    question: '7. For the following array ["a","b","c","d"], the index for letter "a" is:',
+    answers: ['0', '1','2','3'],
+    correctAnswer: '0'
+}  , {
+    question: "8. The method used to remove the last element of my array is:",
+    answers: ['push()', 'unshift()','concat()','pop()'],
+    correctAnswer: 'pop()'
 } ]
 
+// Start Game
 startBtn.addEventListener('click', startGame)
-// console.log(questions)
 
 highScoresEl.addEventListener('click', highScores)
 
@@ -65,12 +65,6 @@ function startGame() {
     questionIndex=0
     startTimer()
     startQuestion()
-
-    // let timer = setInterval(function() {
-    //     secondsLeft--
-    //     timerEl.textContent = 'Time: ' + secondsLeft
-
-    //     startQuestion()}, 1000)  
 }
 
 function startTimer() {
@@ -86,85 +80,99 @@ function startTimer() {
 }
 
 function startQuestion() {
-        // console.log(questionIndex)
+        // Setting up questions and options
         questionText.textContent = questions[questionIndex].question
         listAnswers.setAttribute('style','display:flex; flex-direction:column; justify-content:center; margin-top: 30px')
-        // console.log(listAnswers)
         for (let i=0; i<4; i++) {
             listAnswers.children[i].innerText = questions[questionIndex].answers[i]
             listAnswers.children[i].setAttribute('style', 'display:block; margin:0.2rem; max-width:300px; padding: 0.5rem')
-
-            listAnswers.children[i].addEventListener('click', function(event) {
-            event.preventDefault()
-            // console.log(questions[questionIndex].question)
-
-            // console.log('correct', questions[questionIndex].correctAnswer)
+            listAnswers.children[i].addEventListener('click', function() {
             console.log('selected', listAnswers.children[i].innerText)
+            console.log('correct', questions[questionIndex].correctAnswer)
+            // Check if the answer is correct
             if (listAnswers.children[i].innerText===questions[questionIndex].correctAnswer) {
                 correctCounter++
                 rightResult.style.display= 'block'
                 wrongResult.style.display= 'none'
                 console.log('correct')
                 questionIndex++
-
             } else {
-                wrongCounter++
                 secondsLeft-=10
                 rightResult.style.display= 'none'
                 wrongResult.style.display= 'block'
                 console.log('wrong')
                 questionIndex++
-
             }   
-
             //Next question until all questions have been answered
             if (questionIndex<questions.length) {
                 questionText.textContent = questions[questionIndex].question
                 console.log(questionIndex)
-                for (let j=0; j<4; j++) {
-                    listAnswers.children[j].innerText = questions[questionIndex].answers[j]
+                for (let i=0; i<4; i++) {
+                    listAnswers.children[i].innerText = questions[questionIndex].answers[i]
                     console.log(questions[questionIndex].answers)
                 }
             } else {
-                // clearInterval(timerInterval);
-                // timerEl.textContent = 'Time: ';
                 stopGame()
             }
-            })
-}  }              
+            })  
+        }
+  }              
 
+// all questions answered or time out function
 function stopGame() {
     questionText.textContent = 'All done!'
-    instructionsText.textContent='Your final score is: ' + correctCounter
+    instructionsText.textContent='Your answered: ' + correctCounter + ' questions correctly. Your score is: ' + secondsLeft
     for (let k=0; k<4; k++) {
         listAnswers.children[k].setAttribute('style', 'display: none')
     }
     saveInfoEl.style.display= 'block'
-    console.log(submitBtn)
+    // console.log(submitBtn)
     submitBtn.addEventListener('click', highScores)
+
+    saveInfoEl.addEventListener('click', saveScore)
 }
 
+// high scores display
 function highScores() {
+    highScoresEl.textContent= 'Coding Quiz Challenge'
+    timerEl.textContent = ""
     questionText.textContent = 'High Scores'
     rightResult.style.display= 'none'
     wrongResult.style.display= 'none'
-    saveInfoEl.style.display= 'none'
     instructionsText.textContent=""
+    saveInfoEl.style.display= 'none'
+
+    let buttons= document.querySelectorAll('button')
+    for (i=0; i<buttons.length; i++){
+        buttons[i].style.display= 'none'
+    }
 
     let goBackBtn = document.createElement('button')
     goBackBtn.textContent = 'Go Back'
-    questionText.appendChild(goBackBtn)
+    highScoreList.appendChild(goBackBtn)
 
     let ClearScoresBtn = document.createElement('button')
     ClearScoresBtn.textContent = 'Clear high scores'
-    questionText.appendChild(ClearScoresBtn)
-
-    ClearScoresBtn.style.display = 'block'
-    goBackBtn.style.display = 'block'
+    highScoreList.appendChild(ClearScoresBtn)
 
     goBackBtn.addEventListener('click', function(){
         window.location.reload()
     })
+}
 
- 
+function saveScore(event){
+    event.preventDefault();
+    let userScore = {
+        user: initialsEl.value,
+        score: secondsLeft
+    }
+    localStorage.setItem("userScore", JSON.stringify(userScore));
+    renderMessage();
+}
+
+function renderMessage() {
+    var lastScore = JSON.parse(localStorage.getItem("userScore"));
+  if (userScore !== null) {
+    console.log(userScore) 
+  }
 }
