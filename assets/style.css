@@ -27,6 +27,7 @@ nav {
     background-color: var(--warmColor);
     color: white;
     width: 75%;
+    min-height: 2.5rem;
     display: flex;
     justify-content: space-between;
     border: solid thin black;
@@ -63,7 +64,7 @@ main {
 }
 
 main h1 {
-    padding: 2rem;
+    padding: 1.8rem;
 }
 
 footer {

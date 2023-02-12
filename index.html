@@ -9,6 +9,7 @@
     </head>
 
     <body>
+        <!-- Instructions and Questions -->
         <nav class="navbar">
             <a href='#' class="HighScores">View high scores</a>
             <p class="timer-El">Time: </p>
@@ -23,14 +24,17 @@
                 </p>
             <p class= "instructionsEl">Try to answer the followig code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds. Good luck!</p>
             <button id="startEl">Start Quiz</button>
+            <p class="correct-message">Correct! &#x2713</p>
+            <p class="wrong-message">Wrong! &#x2715</p>
+           <!-- Final Score and Enter Initials Part -->
             <section class="save-info">
                 <label for="initials-text">Enter your initials: </label>
                 <textarea id="initials-el" name="Enter your initials" maxlength="4" minlength="1"></textarea><button id="submit-btn">Submit</button>
             </section>
-            <p class="correct-message">Correct! &#x2713</p>
-            <p class="wrong-message">Wrong! &#x2715</p>
+            <!-- High Scores Display -->
             <section class='High-scores'>
-                <ul class="highScoresList"></ul>
+                <p class="highScoresbuttons"></p>
+                <p class="highScoresList"></p>
             </section>
         </main>
         <footer>

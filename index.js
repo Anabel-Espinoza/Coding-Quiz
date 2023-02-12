@@ -18,6 +18,7 @@ let saveInfoEl = document.querySelector('.save-info')
 let submitBtn = document.querySelector('#submit-btn')
 let initialsEl = document.querySelector('#initials-el')
 let highScoreList = document.querySelector('.highScoresList')
+let highScoreButtons = document.querySelector('.highScoresbuttons')
 let allScores= []
 
 // questions bank
@@ -56,6 +57,7 @@ const questions = [{
 } ]
 
 // Start Game
+
 startBtn.addEventListener('click', startGame)
 
 highScoresEl.addEventListener('click', highScores)
@@ -111,7 +113,7 @@ function startQuestion() {
                 console.log(questionIndex)
                 for (let i=0; i<4; i++) {
                     listAnswers.children[i].innerText = questions[questionIndex].answers[i]
-                    console.log(questions[questionIndex].answers)
+                    // console.log(questions[questionIndex].answers)
                 }
             } else {
                 stopGame()
@@ -136,7 +138,7 @@ function stopGame() {
 
 // high scores display
 function highScores() {
-    highScoresEl.textContent= 'Coding Quiz Challenge'
+    highScoresEl.textContent= ''
     timerEl.textContent = ""
     questionText.textContent = 'High Scores'
     rightResult.style.display= 'none'
@@ -147,19 +149,27 @@ function highScores() {
     for (i=0; i<buttons.length; i++){
         buttons[i].style.display= 'none'
     }
+
     //Go back button
     let goBackBtn = document.createElement('button')
     goBackBtn.textContent = 'Go Back'
-    highScoreList.appendChild(goBackBtn)
+    highScoreButtons.appendChild(goBackBtn)
     goBackBtn.addEventListener('click', function(){
+        // questionIndex=0;
+        // // highScoreButtons.style.display='none'
+        // highScoreList.style.display='none'
+        // startQuestion()
         window.location.reload()
     })
+
+
     // Clear high scores button
     let ClearScoresBtn = document.createElement('button')
     ClearScoresBtn.textContent = 'Clear high scores'
-    highScoreList.appendChild(ClearScoresBtn)
+    highScoreButtons.appendChild(ClearScoresBtn)
     ClearScoresBtn.addEventListener('click', function(){
         localStorage.clear()
+        renderScores()
     })
     // Render Scores
     renderScores()
@@ -174,27 +184,27 @@ function saveScore(event) {
     if (userScore.user === '') {
         return
     }
-    // allScores.push(userScore)
-    localStorage.setItem("userScore", JSON.stringify(userScore));
+    allScores.push(userScore)
+    localStorage.setItem("allScores", JSON.stringify(allScores));
+    console.log(allScores)
     highScores();
 }
 
 function renderScores() {
-    let scoreText = document.createElement('ol')
-    let storedScores = JSON.parse(localStorage.getItem("userScore"));
+    let storedScores = JSON.parse(localStorage.getItem("allScores"));
     if (storedScores !== null) {
-        console.log(storedScores) 
-    // for (let i=0; i<storedScores.length; i++){
-    // let userScore = storedScores[i]
-    scoreText.textContent = storedScores.user + '  ' + storedScores.score;
-    scoreText.setAttribute('style', 'background-color: lightblue')
-    console.log(storedScores.user, storedScores.score)
-    // li.setAttribute('data-index', i)
-    highScoreList.appendChild(scoreText)
-    // highScoresEl.style.display='block'
-  } else {
-    scoreText.style.display='none'
+        console.log(allScores) 
+        for (let i=0; i<allScores.length; i++){
+            let scoreText = document.createElement('p')
+            scoreText.textContent = allScores[i].user + '  ' + allScores[i].score;
+            scoreText.setAttribute('style', 'background-color: lightblue')
+            console.log(allScores[i].user, allScores[i].score)
+            highScoreList.appendChild(scoreText)
+            highScoreList.style.display='block'
 
+            }
+    } else {    
+        highScoreList.style.display='none'
+    }
   }
-}
 
