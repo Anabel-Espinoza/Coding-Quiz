@@ -22,9 +22,9 @@ N/A
 7. The user can retake the test by clicking "Go Back".
 
 The website looks like the following image (images for start game/question example/save score/high scores):
-![Start Quiz screenshot](./assets/images/StartGame.png)
-![Quiz question](./assets/images/QuestionExample.png)
-![Save initials](./assets/images/SaveInitials.png)
+![Start Quiz screenshot](./assets/Images/StartGame.png)
+![Quiz question](./assets/Images/QuestionExample.png)
+![Save initials](./assets/Images/SaveInitials.png)
 ![High scores](./assets/Images/HighScores.png)
 
 ## Credits
