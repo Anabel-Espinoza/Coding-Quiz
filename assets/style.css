@@ -8,7 +8,7 @@
     margin:0;
     padding: 0;
     box-sizing: border-box;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+    font-family: catamaran, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 body {
@@ -60,9 +60,6 @@ main {
     width: 75%;
     line-height: 2rem;
     padding: 35px;
-    /* display: flex; */
-    /* flex-direction: column;
-    justify-content: center; */
 }
 
 main h1 {
@@ -72,7 +69,6 @@ main h1 {
 footer {
     background-color: var(--warmColor);
     width: 75%;
-    /* margin: auto; */
     text-align: center;
     color: white;
     padding: 0.5rem;

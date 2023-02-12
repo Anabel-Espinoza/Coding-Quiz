@@ -18,38 +18,39 @@ let saveInfoEl = document.querySelector('.save-info')
 let submitBtn = document.querySelector('#submit-btn')
 let initialsEl = document.querySelector('#initials-el')
 let highScoreList = document.querySelector('.highScoresList')
+let allScores= []
 
 // questions bank
 const questions = [{
-    question: '1. Commonly used data types do NOT include:',
+    question: 'Commonly used data types do NOT include:',
     answers: ['alerts', 'strings','booleans','numbers'],
     correctAnswer: 'alerts'
 }, {
-    question: '2. The condition in an if/else statement is enclosed with:',
+    question: 'The condition in an if/else statement is enclosed with:',
     answers: ['parenthesis', 'curly brackets','quotes','square brackets'],
     correctAnswer: 'parenthesis'
 }, {
-    question: '3. Arrays in JavaScript can be used to store:',
+    question: 'Arrays in JavaScript can be used to store:',
     answers: ['numbers and strings', 'other arrays','booleans','all of the above'],
     correctAnswer: 'all of the above'
 }, {
-    question: '4. String values must be enclosed within __________ when being assigned to variables.',
+    question: 'String values must be enclosed within ______ when being assigned to variables.',
     answers: ['commas', 'curly brackets','quotes','parenthesis'],
     correctAnswer: 'quotes'
 } , {
-    question: '5. A very useful tool used during development and debugging for printing content to the debugger is:',
+    question: 'A very useful tool used during development and debugging for printing content to the debugger is:',
     answers: ['JavaScript', 'terminal/bash','for loops','console.log'],
     correctAnswer: 'console.log'
 } , {
-    question: '6. Inside the HTML document, the JavaScript code must be placed in the _________ element',
+    question: 'Inside the HTML document, the JavaScript code must be placed in the ____ element',
     answers: ['<head>', '<footer>','<script>','<link>'],
     correctAnswer: '<script>'
 }  , {
-    question: '7. For the following array ["a","b","c","d"], the index for letter "a" is:',
+    question: 'For the following array ["a","b","c","d"], the index for letter "a" is:',
     answers: ['0', '1','2','3'],
     correctAnswer: '0'
 }  , {
-    question: "8. The method used to remove the last element of my array is:",
+    question: "The method used to remove the last element of my array is:",
     answers: ['push()', 'unshift()','concat()','pop()'],
     correctAnswer: 'pop()'
 } ]
@@ -79,6 +80,7 @@ function startTimer() {
     }, 1000);
 }
 
+// Start questions
 function startQuestion() {
         // Setting up questions and options
         questionText.textContent = questions[questionIndex].question
@@ -141,38 +143,58 @@ function highScores() {
     wrongResult.style.display= 'none'
     instructionsText.textContent=""
     saveInfoEl.style.display= 'none'
-
     let buttons= document.querySelectorAll('button')
     for (i=0; i<buttons.length; i++){
         buttons[i].style.display= 'none'
     }
-
+    //Go back button
     let goBackBtn = document.createElement('button')
     goBackBtn.textContent = 'Go Back'
     highScoreList.appendChild(goBackBtn)
-
-    let ClearScoresBtn = document.createElement('button')
-    ClearScoresBtn.textContent = 'Clear high scores'
-    highScoreList.appendChild(ClearScoresBtn)
-
     goBackBtn.addEventListener('click', function(){
         window.location.reload()
     })
+    // Clear high scores button
+    let ClearScoresBtn = document.createElement('button')
+    ClearScoresBtn.textContent = 'Clear high scores'
+    highScoreList.appendChild(ClearScoresBtn)
+    ClearScoresBtn.addEventListener('click', function(){
+        localStorage.clear()
+    })
+    // Render Scores
+    renderScores()
 }
-
-function saveScore(event){
+// Save score button - local storage
+function saveScore(event) {
     event.preventDefault();
     let userScore = {
         user: initialsEl.value,
         score: secondsLeft
     }
+    if (userScore.user === '') {
+        return
+    }
+    // allScores.push(userScore)
     localStorage.setItem("userScore", JSON.stringify(userScore));
-    renderMessage();
+    highScores();
 }
 
-function renderMessage() {
-    var lastScore = JSON.parse(localStorage.getItem("userScore"));
-  if (userScore !== null) {
-    console.log(userScore) 
+function renderScores() {
+    let scoreText = document.createElement('ol')
+    let storedScores = JSON.parse(localStorage.getItem("userScore"));
+    if (storedScores !== null) {
+        console.log(storedScores) 
+    // for (let i=0; i<storedScores.length; i++){
+    // let userScore = storedScores[i]
+    scoreText.textContent = storedScores.user + '  ' + storedScores.score;
+    scoreText.setAttribute('style', 'background-color: lightblue')
+    console.log(storedScores.user, storedScores.score)
+    // li.setAttribute('data-index', i)
+    highScoreList.appendChild(scoreText)
+    // highScoresEl.style.display='block'
+  } else {
+    scoreText.style.display='none'
+
   }
 }
+
