@@ -65,6 +65,7 @@ main {
 
 main h1 {
     padding: 1.8rem;
+    font-size: 1.6rem
 }
 
 footer {
@@ -107,5 +108,25 @@ textarea:focus {
     border: 3px solid silver;   
 }
 
+@media (max-width: 690px) {
+    main h1{
+        font-size: 1.5rem;
+        padding: 1rem
+    }
+    body {
+        font-size: 1rem;
+        padding: 10px;
+    }
+}
 
+  @media (max-width: 500px) {
+    main h1{
+        font-size: 1.3rem;
+        padding: 0.7rem
+    }
+    body {
+      font-size: 0.8rem;
+      padding: 10px
+    }
+  }
   

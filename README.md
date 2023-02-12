@@ -25,7 +25,7 @@ The website looks like the following image (images for start game/question examp
 ![Start Quiz screenshot](./assets/images/StartGame.png)
 ![Quiz question](./assets/images/QuestionExample.png)
 ![Save initials](./assets/images/SaveInitials.png)
-![High scores](./assets/images/HighScores.png)
+![High scores](./assets/Images/HighScores.png)
 
 ## Credits
 

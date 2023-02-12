@@ -169,12 +169,23 @@ function highScores() {
     highScoreButtons.appendChild(ClearScoresBtn)
     ClearScoresBtn.addEventListener('click', function(){
         localStorage.clear()
-        renderScores()
+        highScoreList.innerHTML=''
+
     })
-    // Render Scores
     renderScores()
 }
-// Save score button - local storage
+
+// Check if there are previous local storage scores
+let scoresFromLocalStorage = JSON.parse(localStorage.getItem('allScores'))
+console.log(scoresFromLocalStorage)
+console.log(typeof scoresFromLocalStorage)
+if (scoresFromLocalStorage) {
+    // allScores.push(scoresFromLocalStorage)
+    allScores= scoresFromLocalStorage
+    console.log(allScores, typeof allScores)
+}
+
+// Save current user score
 function saveScore(event) {
     event.preventDefault();
     let userScore = {
@@ -186,22 +197,23 @@ function saveScore(event) {
     }
     allScores.push(userScore)
     localStorage.setItem("allScores", JSON.stringify(allScores));
-    console.log(allScores)
+    console.log(userScore)
+    console.log('allScores:', allScores, 'type', typeof allScores)
     highScores();
 }
 
+// Render score list
 function renderScores() {
-    let storedScores = JSON.parse(localStorage.getItem("allScores"));
-    if (storedScores !== null) {
+    highScoreList.innerHTML=''
+    if (allScores !== null) {
         console.log(allScores) 
         for (let i=0; i<allScores.length; i++){
             let scoreText = document.createElement('p')
-            scoreText.textContent = allScores[i].user + '  ' + allScores[i].score;
+            scoreText.textContent = allScores[i].user + '  ' + allScores[i].score
             scoreText.setAttribute('style', 'background-color: lightblue')
             console.log(allScores[i].user, allScores[i].score)
             highScoreList.appendChild(scoreText)
             highScoreList.style.display='block'
-
             }
     } else {    
         highScoreList.style.display='none'
