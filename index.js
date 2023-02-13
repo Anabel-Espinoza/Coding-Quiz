@@ -21,7 +21,7 @@ let highScoreList = document.querySelector('.highScoresList')
 let highScoreButtons = document.querySelector('.highScoresbuttons')
 let allScores= []
 
-// questions bank
+// Questions Bank
 const questions = [{
     question: 'Commonly used data types do NOT include:',
     answers: ['alerts', 'strings','booleans','numbers'],
@@ -57,9 +57,7 @@ const questions = [{
 } ]
 
 // Start Game
-
 startBtn.addEventListener('click', startGame)
-
 highScoresEl.addEventListener('click', highScores)
 
 function startGame() {
@@ -70,6 +68,7 @@ function startGame() {
     startQuestion()
 }
 
+// Start timer. stopGame function called when time reaches 0 or all questions answered
 function startTimer() {
     let timerInterval= setInterval(function () {
         timerEl.textContent = 'Time: ' + secondsLeft
@@ -113,7 +112,6 @@ function startQuestion() {
                 console.log(questionIndex)
                 for (let i=0; i<4; i++) {
                     listAnswers.children[i].innerText = questions[questionIndex].answers[i]
-                    // console.log(questions[questionIndex].answers)
                 }
             } else {
                 stopGame()
@@ -122,7 +120,7 @@ function startQuestion() {
         }
   }              
 
-// all questions answered or time out function
+// all questions answered or out of time
 function stopGame() {
     questionText.textContent = 'All done!'
     instructionsText.textContent='Your answered: ' + correctCounter + ' questions correctly. Your score is: ' + secondsLeft
@@ -132,14 +130,13 @@ function stopGame() {
     saveInfoEl.style.display= 'block'
     // console.log(submitBtn)
     submitBtn.addEventListener('click', highScores)
-
     saveInfoEl.addEventListener('click', saveScore)
 }
 
 // high scores display
 function highScores() {
     highScoresEl.textContent= ''
-    timerEl.textContent = ""
+    timerEl.innerHTML = ""
     questionText.textContent = 'High Scores'
     rightResult.style.display= 'none'
     wrongResult.style.display= 'none'
@@ -155,10 +152,6 @@ function highScores() {
     goBackBtn.textContent = 'Go Back'
     highScoreButtons.appendChild(goBackBtn)
     goBackBtn.addEventListener('click', function(){
-        // questionIndex=0;
-        // // highScoreButtons.style.display='none'
-        // highScoreList.style.display='none'
-        // startQuestion()
         window.location.reload()
     })
 
@@ -177,10 +170,7 @@ function highScores() {
 
 // Check if there are previous local storage scores
 let scoresFromLocalStorage = JSON.parse(localStorage.getItem('allScores'))
-console.log(scoresFromLocalStorage)
-console.log(typeof scoresFromLocalStorage)
 if (scoresFromLocalStorage) {
-    // allScores.push(scoresFromLocalStorage)
     allScores= scoresFromLocalStorage
     console.log(allScores, typeof allScores)
 }
@@ -206,17 +196,14 @@ function saveScore(event) {
 function renderScores() {
     highScoreList.innerHTML=''
     if (allScores !== null) {
-        console.log(allScores) 
         for (let i=0; i<allScores.length; i++){
             let scoreText = document.createElement('p')
             scoreText.textContent = allScores[i].user + '  ' + allScores[i].score
-            scoreText.setAttribute('style', 'background-color: lightblue')
+            scoreText.setAttribute('style', 'background-color: lightblue; margin-top:5px')
             console.log(allScores[i].user, allScores[i].score)
             highScoreList.appendChild(scoreText)
-            highScoreList.style.display='block'
             }
     } else {    
         highScoreList.style.display='none'
     }
   }
-

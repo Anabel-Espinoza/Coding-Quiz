@@ -1,9 +1,11 @@
+/* Color variables */
 :root {
     --warmColor: #e63946;
     --lightBlue: #a8dadc;
     --darkBlue: #1d3557;
 }
 
+/* General format */
 * {
     margin:0;
     padding: 0;
@@ -11,6 +13,7 @@
     font-family: catamaran, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
+/* Background Area */
 body {
     display: flex;
     border: solid thin black;
@@ -22,22 +25,33 @@ body {
     background: url(./Images/florian-olivo-4hbJ-eymZ1o-unsplash.jpg) no-repeat center center/ cover;
 }
 
-nav {
+/* NavBar with timer and link to High Scores */
+header {
     padding: 0.5rem;
     background-color: var(--warmColor);
     color: white;
     width: 75%;
     min-height: 2.5rem;
-    display: flex;
-    justify-content: space-between;
+    
     border: solid thin black;
 }
+
+nav {
+    display: flex;
+    justify-content:space-between;
+    width: 100%;
+}
+
+/* header ul{
+    display: inline-block;
+} */
 
 nav a {
     text-decoration: none;
     color:white;
 }
 
+/* All buttons and answers */
 button {
     background-color: var(--darkBlue);
     padding: 0.5rem 2rem;
@@ -53,6 +67,7 @@ button:hover {
     color:var(--darkBlue)
 }
 
+/* Test Area */
 main {
     background-color: white;
     border: black solid thin;
@@ -77,6 +92,7 @@ footer {
     border: solid thin black;
 }
 
+/* Answers text and messages */
 .wrong-message,
 .correct-message {
     display: none;
@@ -88,13 +104,13 @@ footer {
 .listAnswersEl {
     display: flex;
     flex-direction: column;
-
 }
 
 #answerAEl, #answerBEl, #answerCEl, #answerDEl, .save-info {
     display: none;
 }
 
+/* Save Initials Input */
 textarea {
     padding: 5px 0;
     border: thin solid silver;
@@ -108,6 +124,7 @@ textarea:focus {
     border: 3px solid silver;   
 }
 
+/* Media Queries for tablet */
 @media (max-width: 690px) {
     main h1{
         font-size: 1.5rem;
@@ -119,6 +136,7 @@ textarea:focus {
     }
 }
 
+/* Media Queries for phone */
   @media (max-width: 500px) {
     main h1{
         font-size: 1.3rem;
@@ -129,4 +147,3 @@ textarea:focus {
       padding: 10px
     }
   }
-  
