@@ -20,7 +20,6 @@ let initialsEl = document.querySelector('#initials-el')
 let highScoreList = document.querySelector('.highScoresList')
 let highScoreButtons = document.querySelector('.highScoresbuttons')
 let allScores= []
-let stopTimer = false
 
 // Questions Bank
 const questions = [{
@@ -74,7 +73,7 @@ function startTimer() {
     let timerInterval= setInterval(function () {
         timerEl.textContent = 'Time: ' + secondsLeft
         secondsLeft--
-        if (secondsLeft <= 0 || questionIndex===questions.length || stopTimer=== true) {
+        if (secondsLeft <= 0 || questionIndex===questions.length) {
             clearInterval(timerInterval);
             timerEl.textContent = 'Time: ' + secondsLeft
             stopGame()
@@ -136,7 +135,6 @@ function stopGame() {
 
 // high scores display
 function highScores() {
-    stopTimer= true
     highScoresEl.textContent= ''
     timerEl.innerHTML = ""
     questionText.textContent = 'High Scores'
