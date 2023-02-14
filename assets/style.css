@@ -42,6 +42,9 @@ nav {
     width: 100%;
 }
 
+.hide {
+    display: none;
+}
 
 nav a {
     text-decoration: none;

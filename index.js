@@ -20,6 +20,7 @@ let initialsEl = document.querySelector('#initials-el')
 let highScoreList = document.querySelector('.highScoresList')
 let highScoreButtons = document.querySelector('.highScoresbuttons')
 let allScores= []
+let navBarEl = document.querySelector('.navbar')
 
 // Questions Bank
 const questions = [{
@@ -135,8 +136,8 @@ function stopGame() {
 
 // high scores display
 function highScores() {
-    highScoresEl.textContent= ''
-    timerEl.innerHTML = ""
+
+    navBarEl.setAttribute('class', 'hide')
     questionText.textContent = 'High Scores'
     rightResult.style.display= 'none'
     wrongResult.style.display= 'none'
