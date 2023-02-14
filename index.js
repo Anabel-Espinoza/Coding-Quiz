@@ -87,7 +87,7 @@ function startQuestion() {
         // Setting up questions and options
         questionText.textContent = questions[questionIndex].question
         listAnswers.setAttribute('style','display:flex; flex-direction:column; justify-content:center; margin-top: 30px')
-        for (let i=0; i<4; i++) {
+        for (let i=0; i<questions[questionIndex].answers.length; i++) {
             listAnswers.children[i].innerText = questions[questionIndex].answers[i]
             listAnswers.children[i].setAttribute('style', 'display:block; margin:0.2rem; max-width:300px; padding: 0.5rem')
             listAnswers.children[i].addEventListener('click', function() {
@@ -111,7 +111,7 @@ function startQuestion() {
             if (questionIndex<questions.length) {
                 questionText.textContent = questions[questionIndex].question
                 console.log(questionIndex)
-                for (let i=0; i<4; i++) {
+                for (let i=0; i<questions[questionIndex].answers.length; i++) {
                     listAnswers.children[i].innerText = questions[questionIndex].answers[i]
                 }
             } else {
